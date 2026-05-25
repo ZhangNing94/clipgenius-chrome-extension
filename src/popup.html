@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ClipGenius</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="0" x2="12" y2="15"/>
+        </svg>
+        <span>ClipGenius</span>
+      </div>
+      <div class="header-actions">
+        <span id="dailyCount" class="badge">0/5</span>
+        <button id="historyBtn" class="icon-btn" title="History">📋</button>
+        <button id="settingsBtn" class="icon-btn" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- Main clip view -->
+    <main id="mainView">
+      <div id="loadingState" class="state">
+        <div class="spinner"></div>
+        <p>Extracting page content...</p>
+      </div>
+
+      <div id="clipResult" class="hidden">
+        <h3 id="clipTitle"></h3>
+        <div id="clipMeta">
+          <span id="clipDomain"></span>
+          <a id="clipUrl" href="#" target="_blank">🔗</a>
+        </div>
+        
+        <div id="tagsSection" class="section">
+          <div class="section-label">🏷️ AI Tags</div>
+          <div id="tagsContainer" class="tags">
+            <span class="tag-loading">Generating tags...</span>
+          </div>
+        </div>
+        
+        <div id="summarySection" class="section">
+          <div class="section-label">📝 AI Summary</div>
+          <p id="summaryText" class="summary-loading">Generating summary...</p>
+        </div>
+
+        <div class="actions">
+          <button id="saveBtn" class="btn btn-primary">💾 Save Clip</button>
+          <button id="copyMdBtn" class="btn btn-secondary">📋 Copy MD</button>
+          <button id="notionBtn" class="btn btn-secondary">📤 Notion</button>
+        </div>
+        
+        <div id="saveFeedback" class="feedback hidden">✅ Saved!</div>
+      </div>
+
+      <div id="errorState" class="state hidden">
+        <p>😕 Could not extract content from this page.</p>
+        <button id="retryBtn" class="btn btn-primary">Retry</button>
+      </div>
+    </main>
+
+    <!-- History view -->
+    <div id="historyView" class="hidden">
+      <div class="history-header">
+        <button id="backBtn" class="icon-btn">← Back</button>
+        <h3>History</h3>
+      </div>
+      <div class="history-filters">
+        <input type="text" id="searchInput" placeholder="Search clips..." class="search-input">
+        <select id="tagFilter" class="filter-select">
+          <option value="">All Tags</option>
+        </select>
+      </div>
+      <div id="clipsList" class="clips-list">
+        <p class="empty-state">No clips saved yet. Start clipping!</p>
+      </div>
+    </div>
+
+    <!-- Settings view -->
+    <div id="settingsView" class="hidden">
+      <div class="history-header">
+        <button id="settingsBackBtn" class="icon-btn">← Back</button>
+        <h3>Settings</h3>
+      </div>
+      <div class="settings-form">
+        <div class="form-group">
+          <label>Notion API Key</label>
+          <input type="password" id="notionKey" placeholder="secret_..." class="text-input">
+        </div>
+        <div class="form-group">
+          <label>Notion Database ID</label>
+          <input type="text" id="notionDbId" placeholder="..." class="text-input">
+        </div>
+        <button id="saveSettingsBtn" class="btn btn-primary">Save Settings</button>
+        <p id="settingsFeedback" class="feedback hidden">✅ Settings saved!</p>
+        <div class="settings-info">
+          <h4>Daily Usage</h4>
+          <p id="usageInfo">Free: 5 clips/day</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
